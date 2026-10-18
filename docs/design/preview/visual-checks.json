@@ -1,0 +1,38 @@
+[
+  {
+    "width": 1440,
+    "height": 900,
+    "scrollWidth": 1440,
+    "documentHeight": 951,
+    "keys": 69,
+    "scripts": 0,
+    "enabledControls": 0,
+    "keyboardWidth": 986,
+    "applicationWidth": 1250,
+    "path": "docs/design/preview/desktop-1440.png"
+  },
+  {
+    "width": 1180,
+    "height": 780,
+    "scrollWidth": 1180,
+    "documentHeight": 951,
+    "keys": 69,
+    "scripts": 0,
+    "enabledControls": 0,
+    "keyboardWidth": 872,
+    "applicationWidth": 1136,
+    "path": "docs/design/preview/desktop-1180.png"
+  },
+  {
+    "width": 960,
+    "height": 680,
+    "scrollWidth": 960,
+    "documentHeight": 897,
+    "keys": 69,
+    "scripts": 0,
+    "enabledControls": 0,
+    "keyboardWidth": 696,
+    "applicationWidth": 916,
+    "path": "docs/design/preview/desktop-960.png"
+  }
+]

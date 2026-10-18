@@ -1,0 +1,17 @@
+node_modules/
+dist/
+out/
+release/
+coverage/
+.local-reference/
+.impeccable/mocks/
+.impeccable/questions/
+.impeccable/config.local.json
+*.log
+*.exe
+*.dll
+*.pcap
+*.pcapng
+.env
+.env.*
+!.env.example
