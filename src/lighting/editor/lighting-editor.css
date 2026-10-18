@@ -1,0 +1,84 @@
+.lighting-editor {
+  margin: 7px 30px 25px;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 34px;
+}
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 13px;
+}
+.section-heading h2 {
+  font-size: 15px;
+  margin: 0;
+  font-weight: 600;
+}
+.selected-color {
+  width: 23px;
+  height: 23px;
+  border-radius: 5px;
+}
+.field-label {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  margin: 3px 0 10px;
+}
+.effect-controls > select {
+  width: 100%;
+  opacity: 0.8;
+}
+.field-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  margin: 27px 0 10px;
+}
+.field-heading span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.range-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.range-row input {
+  width: 100%;
+  padding: 0;
+}
+.range-row output {
+  white-space: nowrap;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  margin-top: 22px;
+}
+.toggle input {
+  width: 16px;
+  height: 16px;
+}
+.support-note,
+.future-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.support-note {
+  max-width: 44ch;
+}
+.future-note {
+  margin-top: 30px;
+  border-top: 1px solid var(--line);
+  padding-top: 15px;
+}

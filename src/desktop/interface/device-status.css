@@ -1,0 +1,36 @@
+.connection-state {
+  margin: 0 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  background: #273629;
+  padding: 12px 14px;
+}
+.connection-state > svg {
+  height: 19px;
+  width: 19px;
+  stroke: var(--muted);
+  fill: none;
+  stroke-width: 1.4;
+  flex-shrink: 0;
+}
+.connection-state > div {
+  flex: 1;
+}
+.connection-state strong {
+  font-size: 13px;
+  font-weight: 500;
+  display: block;
+}
+.connection-state span {
+  font-size: 12px;
+  color: var(--muted);
+  display: block;
+  margin-top: 3px;
+}
+.connection-state button {
+  font-size: 12px;
+  background: transparent;
+  padding: 7px 9px;
+}

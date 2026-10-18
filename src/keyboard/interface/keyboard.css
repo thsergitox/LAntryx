@@ -1,0 +1,41 @@
+.keyboard-stage {
+  padding: 23px 25px 15px;
+}
+.keyboard-stage > svg {
+  width: 100%;
+  max-height: 235px;
+}
+.chassis {
+  fill: #bac7b7;
+}
+.keycap {
+  fill: #e7ece2;
+  stroke: #a6b8a5;
+  stroke-width: 0.7;
+  filter: drop-shadow(0 1px 1px #556b5266);
+}
+.keyboard-stage text {
+  fill: #25362a;
+  text-anchor: middle;
+  font-weight: 600;
+  pointer-events: none;
+}
+.preview-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 14px 5px 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+.preview-caption > span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.preview-caption i {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  display: inline-block;
+}

@@ -1,0 +1,25 @@
+.feedback {
+  margin: 13px 30px 0;
+  font-size: 13px;
+  padding: 12px;
+  background: var(--raised);
+  border-radius: 6px;
+  line-height: 1.5;
+}
+.feedback.error {
+  color: #ffd0ca;
+  background: #452e2b;
+}
+.feedback button {
+  margin-left: 15px;
+  font-size: 12px;
+}
+.loading {
+  padding: 30px;
+  color: var(--muted);
+}
+.field-error {
+  color: #ffc0b9;
+  font-size: 12px;
+  line-height: 1.5;
+}

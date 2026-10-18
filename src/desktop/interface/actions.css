@@ -1,0 +1,37 @@
+.action-bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 17px 30px;
+  border-top: 1px solid var(--line);
+  background: #162019;
+}
+.action-bar p {
+  margin: 0 0 5px;
+  font-size: 13px;
+}
+.action-bar span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.action-buttons {
+  display: flex;
+  gap: 9px;
+  flex-shrink: 0;
+}
+.primary {
+  background: var(--accent);
+  color: #1d2d1c;
+  border-color: var(--accent);
+}
+.primary:hover:not(:disabled) {
+  background: #c9f7a1;
+}
+.primary:disabled {
+  background: #3e5639;
+  border-color: #3e5639;
+  color: #c5d5be;
+  opacity: 0.65;
+}
