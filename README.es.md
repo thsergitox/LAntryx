@@ -31,7 +31,7 @@ node node_modules/electron/install.js
 npm run dev:offline
 ```
 
-El segundo comando descarga Electron; no compila el proyecto. No uses `sudo`, no desactives el sandbox y no ejecutes reconstrucciones nativas automáticas si falla un módulo. La edición sin conexión no necesita cargar node-hid.
+El segundo comando descarga Electron; no compila el proyecto. No uses `sudo`, no desactives el sandbox y no ejecutes reconstrucciones nativas automáticas si falla un módulo. La prueba aislada usa ioctl de la biblioteca estándar de Python 3, sin módulos nativos de Node. Python 3 se necesita para las comprobaciones y la prueba física, no para editar sin conexión. El backend experimental está limitado a Linux x86_64.
 
 Los perfiles se guardan en el directorio de datos de usuario de Electron. La exportación contiene la versión **guardada**, no el borrador sin guardar. La importación genera un identificador nuevo.
 

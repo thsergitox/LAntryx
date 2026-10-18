@@ -70,7 +70,13 @@ async function main(args = process.argv.slice(2)) {
     terminal.close();
   }
   const { runWorker } = require("../src/device/transport/worker-client.cjs");
-  const result = await runWorker({ action: "live-rgb", color });
+  const result = await runWorker({
+    action: "live-rgb",
+    color,
+    path: candidates.filter(
+      (candidate) => validateCandidate(candidate).valid,
+    )[0].path,
+  });
   console.log(JSON.stringify(result, null, 2));
   if (result.outcome !== "transport-accepted") process.exitCode = 1;
 }

@@ -1,6 +1,6 @@
 # LAntryx — design specification
 
-**Status:** direction accepted in conversation; implementation plan awaiting review. **Date:** 2026-10-18.
+**Status:** offline implementation completed under the approved plan; physical protocol validation pending. **Date:** 2026-10-18.
 
 The owner requested progress while away from the keyboard. This document freezes no hardware assumptions and authorizes no unattended USB experiment. It is the proposed design, not an implementation or release claim.
 
@@ -87,3 +87,7 @@ Original project code is proposed under MIT, pending confirmation. Vendor marks 
 ## 11. Acceptance and open decisions
 
 See [acceptance criteria](../verification/acceptance.md). Open decisions: implementation-plan approval, code license, photo rights, packaging targets and all physically unvalidated protocol semantics. None blocks preparing the execution plan; they do block claiming a finished application.
+
+## Implementation record
+
+The owner approved native execution. See [software verification](../verification/software-checks.md) and [execution decisions](../verification/implementation-notes.md) for the actual completed scope, final-review fixes, transport amendment and remaining hardware limitations. Earlier gates above describe the original design process, not an outstanding implementation approval request.

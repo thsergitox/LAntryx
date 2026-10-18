@@ -48,6 +48,7 @@ export type EditorAction =
 export interface Bridge {
   profiles: {
     list(): Promise<Profile[]>;
+    warnings(): Promise<number>;
     save(profile: Profile): Promise<Profile>;
     remove(id: string): Promise<void>;
     import(): Promise<Profile | null>;

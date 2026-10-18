@@ -10,7 +10,7 @@
 - Actual Electron interactions: click color area, keyboard hue adjustment, HEX/RGB synchronization, invalid HEX preservation, black/gray hue retention, swatch selection and save.
 - Actual local profile create/rename/duplicate/delete, export/import and app restart; language and three test profiles persisted. Native dialogs were given controlled temporary paths in the automation, while real application IPC, validation and filesystem operations ran.
 - Apply remains disabled. Explicit simulation reports no physical operation. Renderer remote-request capture and main-process module-cache inspection found no remote renderer requests or loaded node-hid during those interactions.
-- Node-HID's prebuilt module loads in Node without opening any device. This is not an Electron-addon or hardware compatibility result; the first real probe uses a separate Node child.
+- The initial Node-HID prebuilt loaded without opening devices, but the final probe no longer uses it: review found its JS API could not bind report-descriptor validation to the opened handle. A direct Python 3 ioctl child now validates the actual opened descriptor. Fake-handle checks cover replacement/mismatch, short/uncertain sends and post-send close failure. No native addon or native build is needed.
 - `npm audit`: zero reported vulnerabilities in installed dependencies at verification time; not a lasting security guarantee.
 - Impeccable detector: no remaining findings after documenting actual semantic colors. Rendered screenshots inspected separately; the detector does not certify accessibility.
 
@@ -28,3 +28,11 @@ Two simultaneous apply requests could both pass the busy check while awaiting in
 - No release/production security certification or blanket accessibility-compliance claim.
 
 Full integration remains subject to fresh review and the owner-present hardware checklist. Current success is the offline editor, not a finished keyboard driver.
+
+## Final review corrections
+
+An independent reviewer inspected the implementation. Six important findings were addressed in one fix pass: errors no longer reload a dirty editor; profile-replacing operations disable editing; Electron close asks for explicit localized discard with cancel as the default; damaged profile files are skipped with a warning while healthy ones remain available and originals remain untouched; HID identity is validated on the actual opened fd; short/uncertain transfers and cleanup errors keep honest outcomes.
+
+The profile-corruption regression was observed failing before the fix. New focused fake-handle and close-policy checks cover the corrected paths. A separate actual-Electron regression run checks failed-save dismissal, async editing lock, corruption warning, close cancellation and explicit discard.
+
+Minor review findings remain: a shared color-input invalid flag can mark more than the malformed field, and the busy action label says Saving during non-save operations. These do not permit device writes or data loss and are recorded for subsequent polish.

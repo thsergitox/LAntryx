@@ -31,7 +31,7 @@ node node_modules/electron/install.js
 npm run dev:offline
 ```
 
-The Electron installation command downloads the release binary; it does not compile this project. Dependency lifecycle scripts remain disabled, including node-hid's native-compilation fallback. Do not run the application with `sudo` or disable its sandbox. A native-addon load problem does not prevent offline editing.
+The Electron installation command downloads the release binary; it does not compile this project. Dependency lifecycle scripts remain disabled. Do not run the application with `sudo` or disable its sandbox. The isolated hardware probe uses Python 3 standard-library ioctl, not a compiled Node addon. Python 3 is needed for the focused checks/probe, not for offline UI editing. The probe is currently limited to Linux x86_64.
 
 Profiles/preferences live in Electron's per-user application-data directory. Native file dialogs choose import/export destinations. An export contains the **saved** profile, not an unsaved editor draft. Imported profiles receive a new ID.
 

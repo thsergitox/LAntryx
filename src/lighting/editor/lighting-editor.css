@@ -1,4 +1,7 @@
 .lighting-editor {
+  border: 0;
+  min-width: 0;
+  padding: 0;
   margin: 7px 30px 25px;
   border-top: 1px solid var(--line);
   padding-top: 20px;

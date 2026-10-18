@@ -17,3 +17,6 @@ coverage/
 !.env.example
 .local-data/
 .ui-checks/
+
+__pycache__/
+*.pyc

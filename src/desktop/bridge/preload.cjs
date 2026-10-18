@@ -7,6 +7,7 @@ async function invoke(action, payload) {
 contextBridge.exposeInMainWorld("lantryx", {
   profiles: {
     list: () => invoke("profiles.list"),
+    warnings: () => invoke("profiles.warnings"),
     save: (profile) => invoke("profiles.save", profile),
     remove: (id) => invoke("profiles.remove", id),
     import: () => invoke("profiles.import"),

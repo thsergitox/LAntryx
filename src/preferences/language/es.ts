@@ -1,4 +1,7 @@
 export const es = {
+  dismiss: "Cerrar aviso",
+  corruptProfiles:
+    "Se omitieron perfiles dañados. Sus archivos se conservaron intactos; revisa el directorio de perfiles.",
   lighting: "Iluminación",
   tagline: "Iluminación para Linux",
   profiles: "Perfiles locales",

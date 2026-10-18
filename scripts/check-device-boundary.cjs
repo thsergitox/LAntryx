@@ -52,7 +52,9 @@ const { runWorker } = require("../src/device/transport/worker-client.cjs");
   let killed = 0;
   const spawn = () => {
     const child = new EventEmitter();
-    child.send = () => {};
+    child.stdout = new EventEmitter();
+    child.stdin = new EventEmitter();
+    child.stdin.end = () => {};
     child.kill = () => {
       killed++;
     };

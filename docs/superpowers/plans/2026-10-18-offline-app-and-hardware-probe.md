@@ -10,7 +10,7 @@
 
 **Spec:** [Design specification](../../specs/2026-10-18-lantryx-design.md), [visual brief](../../design/desktop-brief.md), [acceptance](../../verification/acceptance.md).
 
-**Status:** ready for owner review, not executed. No application files, product dependencies or launcher commands below exist yet.
+**Status:** owner approved native execution; offline implementation and focused checks completed. This is the original execution plan; final review corrections and remaining limitations are recorded in the verification report. Hardware validation remains pending.
 
 ## Global Constraints
 
@@ -131,3 +131,9 @@ Define these project-owned contracts in `src/desktop/bridge/contracts.d.ts`; the
 Offline app complete means a runnable, verified editor with profiles and a working visual picker—not merely another sketch. Hardware-ready means a bounded, explicit test path exists; it does NOT mean the keyboard has been successfully controlled. Packaging, brightness/off activation and effect/per-key expansion remain separate verified milestones.
 
 **Recommended execution:** native implementation in this session, because the six tasks share a small set of contracts and there is no benefit to concurrent edits around an unverified hardware boundary. Delegated task-by-task implementation is an alternative with stronger intermediate independent review but higher context cost. Ask the owner to review this plan and select the execution method before product implementation.
+
+## Execution amendments
+
+The fresh review required actual opened-handle identity binding. The final experimental transport therefore uses Python 3 stdlib `fcntl.ioctl` on one fd (Linux x86_64), instead of node-hid: its available JS API exposed device info but not the needed same-handle report descriptor. The Node addon was removed, no native rebuild was run, and timeout kills the direct child rather than leaving a grandchild. This costs a Python 3 dependency for checks/probe, not for offline editing.
+
+A first integrated commit contains the runnable shell/profile/editor/boundary milestone because their contracts are interdependent. Backend verification uses runtime validation and focused checks; it is not claimed to be fully TypeScript checked. No production builds or physical experiments were performed. The owner-approved MIT proposal covers only original project material. The physical product photograph remains pending clearance and is not a publication asset.

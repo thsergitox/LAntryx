@@ -1,54 +1,36 @@
-# Proposed application structure
+# Application structure
 
-**Proposal only.** These directories describe responsibility boundaries; they are not existing implementation files or package names.
+Implemented as one desktop application. Source follows feature ownership, not a generic helpers/utility hierarchy.
 
 ```text
 src/
   desktop/
-    lifecycle/        window lifecycle and local-content policy
-    bridge/           preload actions and validated IPC handlers
-    composition/      connects application services to adapters
+    lifecycle/       Electron window, startup and localized close confirmation
+    bridge/          validated named IPC, preload and shared TypeScript contracts
+    interface/       application composition, workspace state and shell styles
   lighting/
-    model/            validated settings and supported capabilities
-    editor/           draft state and lighting controls
-    application/      apply action and pending/applied snapshots
-    protocol/         pure encoding, no I/O or UI imports
-  device/
-    detection/        identity, interface and descriptor checks
-    access/           permission state and scoped recovery guidance
-    transport/        offline adapter; later, gated real HID adapter
-    connection/       connection generations, queue and cancellation
+    model/           pure RGB conversion and saved/draft/applied reducer
+    editor/          visual color picker, HEX/RGB, profile-level controls
+    protocol/        pure static-candidate RGB frame encoder
   profiles/
-    model/            portable, versioned profile data
-    application/      save/load/import/export actions
-    persistence/      atomic local files and import validation
-    interface/        sidebar and profile management
+    model/           portable profile factory and runtime schema
+    application/     bounded import parsing
+    persistence/     atomic local writes and recoverable corrupt entries
+    interface/       profile rows, actions and protected dialogs
   keyboard/
-    model/            physical layout independent of LED-slot mapping
-    interface/        keyboard preview and future key selection
+    model/           69 physical positions, independent of LED slots
+    interface/       original vector whole-board preview
   preferences/
-    language/         English/Spanish choice and translations
-    persistence/      local application preferences
+    language/        English/Spanish copy
+    persistence/     local language preference
+  device/
+    detection/       explicit sysfs identity/descriptor inspection
+    connection/      operation/generation guard, no auto-reconnect writes
+    transport/       offline adapter, bounded child client, Python fd-bound probe
 ```
 
-UI-specific components stay with the feature they serve. Extract a shared component only after real duplication, not into an empty `utils/` or speculative design-system package.
+The renderer cannot supply filesystem paths, HID payloads or device nodes through preload. Main explicitly composes only the offline adapter. The CLI is separate; before any write its Python child validates VID/PID and report descriptor using ioctl on the exact opened fd, then sends at most one report. Missing Python, unsupported architecture, mismatch, cancellation or timeout fails closed; none triggers an alternative command or permission mutation.
 
-## Dependency direction
+Node modules use runtime schema validation, syntax and focused behavior checks. TypeScript covers the renderer and shared contracts. There is no main/preload compilation step.
 
-```text
-Renderer → preload action → application service → adapter
-                  validation       ↓
-                           pure domain/protocol
-```
-
-The desktop composition root chooses the adapter. A renderer input cannot select arbitrary USB paths or raw commands. Domain code must not import Electron, React, filesystem APIs or a native HID library.
-
-## Initial adapter policy
-
-Offline mode is explicit, visible and the only default before hardware verification. It can simulate connection, permission and apply errors, but must not be used as evidence that a keyboard operation succeeded.
-
-Real HID access remains an experimental implementation gate. Future device discovery is a read operation; applying a color is an explicit user action, never a consequence of rendering, importing, saving or reconnecting.
-
-## Local profile workflow
-
-`select → draft → preview → save locally` is independent of `apply to device`. Pending changes and the last applied snapshot are distinct so a failed transfer cannot silently mark an unapplied configuration as active.
+Local saving, editing, simulation, transport acceptance and physical visual confirmation remain different events. Reconnection does not change adapters or unlock Apply.

@@ -1,6 +1,6 @@
 # Desktop direction — draft
 
-**Surface:** main lighting window. **Mode:** Operate. **Status:** direction accepted in conversation; functional implementation pending.
+**Surface:** main lighting window. **Mode:** Operate. **Status:** direction implemented in the offline app; hardware behavior remains unverified.
 
 The owner accepted the proposal and requested implementation with a visual color picker. This document describes direction, not a working application. Existing screenshots constrain the topology: profile sidebar, dominant keyboard and lighting controls. They do not require proprietary textures or the ornamental Windows frame.
 

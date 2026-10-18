@@ -3,6 +3,7 @@ const { readImport } = require("../../profiles/application/import-export.cjs");
 function profileHandlers(store, dialog, getWindow) {
   return {
     "profiles.list": () => store.list(),
+    "profiles.warnings": () => store.getWarnings(),
     "profiles.save": async (profile) => {
       await store.save(profile);
       return profile;

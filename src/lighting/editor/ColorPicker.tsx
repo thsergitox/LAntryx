@@ -16,10 +16,12 @@ export function ColorPicker({
   color,
   onChange,
   t,
+  disabled,
 }: {
   color: Rgb;
   onChange: (color: Rgb) => void;
   t: Copy;
+  disabled: boolean;
 }) {
   const [value, setValue] = useState(() =>
     parseColor(formatHex(color)).toFormat("hsb"),
@@ -54,6 +56,7 @@ export function ColorPicker({
       }}
     >
       <ColorArea
+        isDisabled={disabled}
         aria-label={t.colorArea}
         xChannel="saturation"
         yChannel="brightness"
@@ -61,7 +64,7 @@ export function ColorPicker({
       >
         <ColorThumb className="color-thumb" />
       </ColorArea>
-      <ColorSlider channel="hue" className="hue-slider">
+      <ColorSlider isDisabled={disabled} channel="hue" className="hue-slider">
         <Label>{t.hue}</Label>
         <SliderTrack className="hue-track">
           <ColorThumb className="color-thumb" />

@@ -7,16 +7,13 @@
   "scripts": {
     "dev:offline": "node scripts/dev.mjs",
     "typecheck": "tsc --noEmit",
-    "check": "node scripts/check-syntax.cjs && node scripts/check-profiles.cjs && node scripts/check-editor.mjs && node scripts/check-device-boundary.cjs && node scripts/check-protocol.cjs",
+    "check": "node scripts/check-syntax.cjs && node scripts/check-profiles.cjs && node scripts/check-editor.mjs && node scripts/check-device-boundary.cjs && node scripts/check-protocol.cjs && node scripts/check-review-regressions.cjs && python3 scripts/check-native-probe.py",
     "hardware:check": "node scripts/hardware-check.cjs"
   },
   "dependencies": {
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-aria-components": "1.22.1"
-  },
-  "optionalDependencies": {
-    "node-hid": "3.4.0"
   },
   "devDependencies": {
     "electron": "44.9.0",

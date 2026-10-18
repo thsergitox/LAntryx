@@ -17,7 +17,7 @@ if (!origin || !/^http:\/\/127\.0\.0\.1:\d+$/.test(origin))
 if (process.env.LANTRYX_DATA_DIR)
   app.setPath("userData", path.resolve(process.env.LANTRYX_DATA_DIR));
 let window;
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   session.defaultSession.setPermissionRequestHandler(
     (_contents, _permission, callback) => callback(false),
   );
@@ -28,11 +28,19 @@ app.whenReady().then(() => {
   const preferences = createPreferences(
     path.join(app.getPath("userData"), "preferences.json"),
   );
+  let language = "es";
   const handlers = {
     ...profileHandlers(store, dialog, () => window),
     ...deviceHandlers(createOfflineTransport()),
-    "preferences.get": () => preferences.get(),
-    "preferences.set": (value) => preferences.set(value),
+    "preferences.get": async () => {
+      const value = await preferences.get();
+      language = value.language;
+      return value;
+    },
+    "preferences.set": async (value) => {
+      await preferences.set(value);
+      language = value;
+    },
   };
   ipcMain.handle("lantryx:action", async (event, action, payload) => {
     try {
@@ -53,5 +61,9 @@ app.whenReady().then(() => {
     }
   });
   window = createWindow(BrowserWindow, origin);
+  const { confirmClose } = require("./close-confirmation.cjs");
+  window.webContents.on("will-prevent-unload", (event) =>
+    confirmClose(window, dialog, language, event),
+  );
 });
 app.on("window-all-closed", () => app.quit());

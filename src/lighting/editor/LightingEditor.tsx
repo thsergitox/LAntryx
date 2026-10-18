@@ -21,15 +21,21 @@ export function LightingEditor({
   lighting,
   dispatch,
   t,
+  busy,
 }: {
   lighting: Lighting;
   dispatch: (action: EditorAction) => void;
   t: Copy;
+  busy: boolean;
 }) {
   const change = (color: Lighting["color"]) =>
     dispatch({ type: "edit-color", color });
   return (
-    <section className="lighting-editor" aria-label={t.lighting}>
+    <fieldset
+      className="lighting-editor"
+      aria-label={t.lighting}
+      disabled={busy}
+    >
       <div className="color-controls">
         <div className="section-heading">
           <h2>{t.color}</h2>
@@ -39,7 +45,12 @@ export function LightingEditor({
             aria-label={`${t.profileColor} ${formatHex(lighting.color)}`}
           />
         </div>
-        <ColorPicker color={lighting.color} onChange={change} t={t} />
+        <ColorPicker
+          color={lighting.color}
+          onChange={change}
+          t={t}
+          disabled={busy}
+        />
         <ColorFields color={lighting.color} onChange={change} t={t} />
         <div className="swatches" role="group" aria-label={t.swatches}>
           {swatches.map((hex) => (
@@ -95,6 +106,6 @@ export function LightingEditor({
         <p className="support-note">{t.levelNote}</p>
         <p className="future-note">{t.future}</p>
       </div>
-    </section>
+    </fieldset>
   );
 }

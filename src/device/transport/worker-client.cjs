@@ -1,18 +1,12 @@
-const { fork } = require("node:child_process");
+const { spawn: spawnProcess } = require("node:child_process");
 const path = require("node:path");
-function runWorker(
-  message,
-  {
-    timeout = 3000,
-    spawn = fork,
-    workerPath = path.join(__dirname, "worker.cjs"),
-  } = {},
-) {
+function runWorker(message, { timeout = 3000, spawn = spawnProcess } = {}) {
   return new Promise((resolve) => {
-    const child = spawn(workerPath, [], {
-      stdio: ["ignore", "ignore", "ignore", "ipc"],
+    const child = spawn("python3", [path.join(__dirname, "native-probe.py")], {
+      stdio: ["pipe", "pipe", "ignore"],
     });
-    let settled = false;
+    let settled = false,
+      output = "";
     function finish(value) {
       if (settled) return;
       settled = true;
@@ -28,24 +22,39 @@ function runWorker(
         }),
       timeout,
     );
-    child.once("message", (result) =>
-      finish(
-        result.ok ? result.value : { outcome: "failed", message: result.error },
-      ),
-    );
+    child.stdout.on("data", (chunk) => {
+      output += chunk.toString();
+      if (output.length > 16384)
+        finish({ outcome: "unknown", message: "Invalid worker output." });
+    });
     child.once("error", () =>
       finish({
-        outcome: "unknown",
-        message: "Worker failed; outcome unknown.",
+        outcome: "failed",
+        message: "Could not start Python 3; no transfer requested.",
       }),
     );
-    child.once("exit", () =>
+    child.stdin.on("error", () =>
       finish({
         outcome: "unknown",
-        message: "Worker exited without a result.",
+        message: "Worker input failed; outcome unknown.",
       }),
     );
-    child.send(message);
+    child.once("close", () => {
+      try {
+        const result = JSON.parse(output);
+        if (
+          !["transport-accepted", "failed", "unknown"].includes(result.outcome)
+        )
+          throw new Error();
+        finish(result);
+      } catch {
+        finish({
+          outcome: "unknown",
+          message: "Worker ended without a valid result.",
+        });
+      }
+    });
+    child.stdin.end(JSON.stringify(message));
   });
 }
 module.exports = { runWorker };

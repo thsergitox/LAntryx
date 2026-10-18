@@ -1,5 +1,8 @@
 import type { es } from "./es";
 export const en: Record<keyof typeof es, string> = {
+  dismiss: "Dismiss",
+  corruptProfiles:
+    "Damaged profiles were skipped. Their files were left intact; check the profiles directory.",
   lighting: "Lighting",
   tagline: "Lighting for Linux",
   profiles: "Local profiles",

@@ -34,6 +34,7 @@ export function useWorkspace() {
   }
   async function refresh() {
     setProfiles(await window.lantryx.profiles.list());
+    if (await window.lantryx.profiles.warnings()) setNotice("corruptProfiles");
   }
   function mayDiscard() {
     return !state.dirty || window.confirm(t.discard);
@@ -54,6 +55,8 @@ export function useWorkspace() {
         values = [profile];
       }
       setProfiles(values);
+      if (await window.lantryx.profiles.warnings())
+        setNotice("corruptProfiles");
       dispatch({ type: "load-profile", profile: values[0] });
     });
   }
@@ -83,6 +86,10 @@ export function useWorkspace() {
     notice,
     t,
     bootstrap,
+    retry: () => {
+      if (profiles.length) setError("");
+      else void bootstrap();
+    },
     mayDiscard,
     select: (profile: Profile) => {
       if (mayDiscard()) dispatch({ type: "load-profile", profile });

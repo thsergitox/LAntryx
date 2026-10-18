@@ -35,9 +35,9 @@ Un fingerprint coincidente demuestra identidad estática, NO que el protocolo RG
 npm run hardware:check -- --probe
 ```
 
-Requiere una terminal interactiva. Vuelve a inspeccionar la identidad; solicita `#RRGGBB` y una frase exacta que confirma modelo e incertidumbre. El proceso hijo vuelve a comprobar el dispositivo antes de abrirlo. Solo solicita UN Feature report 8: `08 0A 7A 01` y 126 ternas RGB. Timeout de 3 segundos; sin reintentos ni comandos alternativos.
+Requiere una terminal interactiva. Vuelve a inspeccionar la identidad; solicita `#RRGGBB` y una frase exacta que confirma modelo e incertidumbre. El proceso hijo Python 3 abre el nodo y comprueba VID/PID y el descriptor mediante ioctl sobre ESE MISMO descriptor de archivo antes de enviar: una reutilización del nombre hidraw no permite saltarse la validación. El backend experimental de ioctl solo admite Linux x86_64. Solo solicita UN Feature report 8: `08 0A 7A 01` y 126 ternas RGB. Timeout de 3 segundos; sin reintentos ni comandos alternativos.
 
-Registrar el resultado técnico y observar el teclado. «transport-accepted» significa transferencia aceptada, no color correcto ni persistencia. Un timeout tiene resultado DESCONOCIDO: matar el proceso no deshace una transferencia. Ante cualquier error, parar.
+Registrar el resultado técnico y observar el teclado. «transport-accepted» exige la longitud completa de 382 bytes; aun así no significa color correcto ni persistencia. Una transferencia corta o un error durante el envío tiene resultado desconocido. Un error de limpieza no reescribe como fallida una transferencia ya aceptada. Un timeout tiene resultado DESCONOCIDO: matar el proceso no deshace una transferencia. Ante cualquier error, parar.
 
 Si un único frame no cambia nada, NO iniciar un bucle ni adivinar comandos de modo. Investigar la inicialización por separado. La lectura de perfil OEM incluye una petición SetFeature y tiene una discrepancia de longitud del reporte 5: NO es identificación pasiva ni se corrige recortando bytes automáticamente.
 

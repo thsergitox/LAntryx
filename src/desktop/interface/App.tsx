@@ -48,7 +48,8 @@ export function App() {
               notice={w.notice}
               busy={w.busy}
               t={t}
-              onRetry={() => void w.bootstrap()}
+              onRetry={w.retry}
+              retryIsDismiss={w.profiles.length > 0}
             />
             {w.busy && !w.profiles.length ? (
               <p className="loading" role="status">
@@ -60,6 +61,7 @@ export function App() {
                 <LightingEditor
                   lighting={w.state.draft}
                   dispatch={w.dispatch}
+                  busy={w.busy}
                   t={t}
                 />
               </>
