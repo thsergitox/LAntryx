@@ -20,4 +20,8 @@ The planned keyboard illustration is original UI geometry based on the physical 
 
 ## Code and asset terms
 
-MIT is proposed for original code only. A future LICENSE file must not silently relicense vendor media, logos, OEM binaries or raw decompilation results. This stage adds no approved product photograph and makes no asset-clearance claim.
+MIT covers original project code only. LICENSE does not relicense vendor media, logos, OEM binaries or raw decompilation results. This stage adds no approved product photograph and makes no asset-clearance claim.
+
+## Running-application screenshot
+
+`screenshots/offline-desktop.png` is a screenshot captured from the actual offline Electron app on Linux on 2026-10-18, at 1440×900 logical content size with desktop scaling. It uses a temporary default local profile and no physical device state. The UI and vector keyboard are project-authored; no vendor bitmap or logo was embedded. Origin metadata is embedded in the PNG. This is distinct from the earlier nonfunctional static sketch and from the still-pending physical product photograph.

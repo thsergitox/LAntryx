@@ -10,7 +10,7 @@ The interface is intended for a Linux desktop application, not a website. The va
 
 ## Stack
 
-Proposed, pending review: Electron, React and TypeScript, with a HID transport isolated from the renderer. The user permits Electron and has requested offline progress with the available information. No application dependencies or product scaffold exist yet.
+Electron, React and TypeScript renderer, with directly executable Node modules behind a narrow preload bridge. The offline editor and profiles are implemented; the real HID transport is isolated in a manually confirmed CLI experiment.
 
 ## Users
 
@@ -29,7 +29,7 @@ A community-maintained Linux desktop configurator informed by static analysis of
 - Linux desktop, initially Arch Linux and Hyprland, with fractional scaling.
 - The owner is currently away from the hardware. This phase must not access or change the keyboard.
 - Public GitHub repository requested via `gh`, under the owner's account. Intended local path: `/home/sergi/Documents/projects/LAntryx`.
-- The owner wants to review the plan before product implementation.
+- The owner reviewed the proposal and approved native implementation.
 - Do not run builds after changes. Conventional commits only, without AI attribution.
 
 ## Capabilities and Constraints
@@ -52,11 +52,11 @@ A community-maintained Linux desktop configurator informed by static analysis of
 
 ## Evidence on Hand
 
-- Original private screenshots: `/tmp/codex-clipboard-16950598-34dd-4349-8b12-c26121bb4511.png` and `/tmp/codex-clipboard-2d654a0e-3a24-4dfa-aba0-ea7bc21cfedc.png`.
-- Local investigation: `/home/sergi/Downloads/LAntryx-evidence/PROTOCOL.md` and its REA evidence directory.
+- Owner-supplied OEM screenshots are private design references, excluded from publication.
+- Full static investigation and REA evidence stay in a private local research directory.
 - Observed device: USB `258a:0049`; the VID/PID alone is insufficient identification.
 - Static observations include Feature reports 5, 6, and 8. No physical color-change test has passed.
-- No approved application screenshot, original project logo, or cleared product-photo redistribution terms are on hand.
+- A running offline-app screenshot and original typographic identity exist. Physical product-photo redistribution terms remain uncleared.
 
 ## Product Principles
 

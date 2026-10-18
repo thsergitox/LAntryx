@@ -1,36 +1,54 @@
 # LAntryx
 
-**Configuración de iluminación para teclados Antryx en Linux, como proyecto independiente.**
+**Tu teclado. Tu color. En Linux.**
 
-[English](README.md) · [Especificación](docs/specs/2026-10-18-lantryx-design.md) · [Diseño visual](docs/design/desktop-brief.md)
+Editor independiente para el Antryx MK825 TRIX: selector visual RGB, vista previa de 69 teclas y perfiles locales.
 
-> Fase de planificación e investigación. Todavía no hay una aplicación ejecutable ni soporte confirmado mediante pruebas físicas.
+[English](README.md) · [Contribuir](CONTRIBUTING.md) · [Prueba con el teclado](docs/verification/hardware-session.md)
 
-La primera meta es conseguir un color RGB uniforme y fiable en el MK825 TRIX sin Wine. Después: perfiles locales, representación del teclado, español/inglés, efectos verificados, brillo y velocidad.
+![Aplicación LAntryx ejecutándose sin conexión, con selector visual de color y teclado](docs/design/screenshots/offline-desktop.png)
 
-## Propuesta de escritorio
+> **Experimental.** La aplicación funciona sin conexión. Aún no hay una prueba física satisfactoria de cambio de color. «Aplicar al teclado» está bloqueado deliberadamente; la prueba USB es un procedimiento separado y confirmado por el propietario.
 
-![Boceto no funcional de LAntryx, con perfiles locales, teclado y controles de iluminación](docs/design/preview/desktop-1440.png)
+## Ya funciona
 
-Propuesta de diseño, no captura de una aplicación funcional ni fotografía del teclado físico. Todos los controles están inactivos. [Abrir boceto estático](docs/design/preview/index.html) · [Notas de revisión visual](docs/design/preview/README.md).
+- Elegir el RGB con clic o arrastre, barra de tono, teclado, HEX/RGB o muestras rápidas.
+- Ver el color seleccionado en el teclado español de 69 teclas.
+- Crear, renombrar, duplicar, eliminar, guardar, importar y exportar perfiles.
+- Cambiar la interfaz entre español e inglés y conservar los perfiles al reiniciar.
+- Guardar brillo/apagado como preferencias del perfil, SIN afirmar que ya funcionan en el dispositivo.
+- Probar una simulación explícita, sin abrir dispositivos HID.
 
-## Qué está preparado
+Guardar en Linux NO aplica cambios al teclado. La aplicación normal no enumera ni abre dispositivos USB al arrancar ni al editar.
 
-- Alcance del MVP y criterios de aceptación.
-- Propuesta de arquitectura y límites de seguridad.
-- Dirección visual basada en las capturas facilitadas.
-- Investigación estática del protocolo, separada de sus validaciones pendientes.
-- Guía de contribución para trabajar sin hardware.
-- [Plan de implementación](docs/superpowers/plans/2026-10-18-offline-app-and-hardware-probe.md) preparado para revisión, incluyendo selector visual de color, barra de tono y campos HEX/RGB sincronizados.
+## Ejecutar
 
-## Qué no está implementado
+Escritorio Linux, Node.js **22.12+** (probado con 22.22.0) y npm. Todavía no hay instalador.
 
-No existen todavía código de aplicación, instaladores ni pruebas satisfactorias de iluminación. Los controles no verificados no se presentarán como funciones disponibles.
+```sh
+npm ci --ignore-scripts
+node node_modules/electron/install.js
+npm run dev:offline
+```
 
-Guardar un perfil en Linux, previsualizarlo y aplicarlo al teclado serán operaciones diferentes.
+El segundo comando descarga Electron; no compila el proyecto. No uses `sudo`, no desactives el sandbox y no ejecutes reconstrucciones nativas automáticas si falla un módulo. La edición sin conexión no necesita cargar node-hid.
 
-## Código abierto e imágenes
+Los perfiles se guardan en el directorio de datos de usuario de Electron. La exportación contiene la versión **guardada**, no el borrador sin guardar. La importación genera un identificador nuevo.
 
-Se propone MIT para el código original, pendiente de confirmación. La fotografía real del teclado y los elementos de marca requieren su procedencia y condiciones de uso por separado; no están cubiertos automáticamente por la licencia del código.
+## Verificación
 
-Proyecto comunitario, no afiliado ni oficial de Antryx. No redistribuye el software propietario del fabricante.
+```sh
+npm run typecheck
+npm run check
+npm run hardware:check -- --dry-run
+```
+
+No ejecutan builds ni acceden al teclado real. [Resultados y límites comprobados](docs/verification/software-checks.md).
+
+Cuando estés frente al teclado, sigue la [guía de prueba física](docs/verification/hardware-session.md): identificación primero y, solo con confirmación, un único paquete RGB experimental. La inicialización, el efecto visible, el brillo/apagado y la persistencia siguen pendientes; no se enviarán comandos de firmware, matriz de teclas o escritura de perfiles.
+
+## Código abierto
+
+Código original bajo [MIT](LICENSE). Proyecto comunitario, no oficial ni afiliado a Antryx. No se distribuye su software propietario ni sus recursos gráficos. Las dependencias conservan sus licencias.
+
+La imagen es una captura REAL de la aplicación sin conexión. La fotografía del teclado físico sigue pendiente de una imagen propia o con permiso de redistribución; [procedencia de recursos](docs/design/assets.md).

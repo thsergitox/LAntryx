@@ -1,8 +1,8 @@
 # Security and device safety
 
-No runnable application or public release exists at this stage.
+An experimental offline desktop editor exists. There is no packaged release or physically verified keyboard-control support.
 
-For a future public repository, use GitHub private vulnerability reporting once the maintainer enables it. Until that channel is configured, do not post secrets, sensitive captures or exploitable details publicly; contact the maintainer through a previously agreed private channel. No security email address is invented here.
+Use GitHub private vulnerability reporting once the maintainer enables it. Until that channel is configured, do not post secrets, sensitive captures or exploitable details publicly; contact the maintainer through a previously agreed private channel. No security email address is invented here.
 
 ## Design requirements
 
