@@ -23,7 +23,7 @@ Read the [research summary](docs/research/protocol-status.md). Raw decompiler ou
 ## Planned experience
 
 - Visual Spanish-layout keyboard with an explicit preview state.
-- Uniform color with HEX/RGB input and saved swatches.
+- Uniform color with a clickable/draggable color picker, synchronized HEX/RGB input and saved swatches.
 - Named local profiles with import/export.
 - English and Spanish interface.
 - Only verified device capabilities enabled for hardware application.
@@ -33,7 +33,7 @@ Saving a local profile must not silently write to the device. Preview success mu
 
 ## Development status
 
-The [application structure](docs/architecture/application-structure.md) is a proposal, not a list of existing source files. Application scaffolding and the detailed execution plan await review of the written design.
+The [application structure](docs/architecture/application-structure.md) describes intended responsibility boundaries, not existing source files. The owner accepted the direction; the [implementation plan](docs/superpowers/plans/2026-10-18-offline-app-and-hardware-probe.md) now awaits review before application scaffolding and execution.
 
 No installation or launch commands are published because no application exists yet. Builds are not run automatically during this work.
 

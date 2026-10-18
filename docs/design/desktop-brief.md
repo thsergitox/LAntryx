@@ -1,8 +1,8 @@
 # Desktop direction — draft
 
-**Surface:** main lighting window. **Mode:** Operate. **Status:** proposed, not owner-approved.
+**Surface:** main lighting window. **Mode:** Operate. **Status:** direction accepted in conversation; functional implementation pending.
 
-The owner has asked for progress with existing information. This is a reviewable proposal, not a silently approved direction or a working application. Existing screenshots constrain the topology: profile sidebar, dominant keyboard and lighting controls. They do not require proprietary textures or the ornamental Windows frame.
+The owner accepted the proposal and requested implementation with a visual color picker. This document describes direction, not a working application. Existing screenshots constrain the topology: profile sidebar, dominant keyboard and lighting controls. They do not require proprietary textures or the ornamental Windows frame.
 
 ## Job and scene
 
@@ -79,4 +79,10 @@ Target text contrast is at least 4.5:1. Use visible focus, standard keyboard int
 
 `preview/index.html` is a nonfunctional, no-JavaScript design sketch. Profile names, selected color and level values are illustrative. No device is accessed, no native title-bar behavior is simulated and no controls claim to work.
 
-This draft must be reviewed before a token-bearing DESIGN.md, final UI code or a detailed implementation plan is treated as approved.
+The direction is accepted; the implementation plan still needs review before functional UI work. The static sketch remains historical evidence of the proposed layout, not proof that the new color picker or any other function exists.
+
+## Requested visual color picker
+
+Use a saturation/value square with a draggable marker and a separate hue slider. Click or drag to choose a color without entering numbers. Keep HEX, RGB, swatches and the whole-board preview synchronized; do not expose transparency. Retain the last hue when choosing gray or black so returning to a saturated color is predictable.
+
+Place the picker inline in the Color section, not in a clipped custom popup. Support labeled keyboard controls and visible focus. A color-spectrum gradient is functional input here, not decorative page styling. RGB remains the canonical stored value, rounded to integer channels 0–255; draft picker coordinates may preserve hue while editing. No picker gesture applies settings to hardware.

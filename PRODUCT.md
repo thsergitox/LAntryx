@@ -35,6 +35,7 @@ A community-maintained Linux desktop configurator informed by static analysis of
 ## Capabilities and Constraints
 
 - First milestone: uniform RGB, illumination off, validated brightness levels, local profiles, and EN/ES.
+- Color selection includes a clickable/draggable visual color area, hue slider and synchronized HEX/RGB inputs; color edits never automatically send to hardware.
 - Subsequent scope: visual key selection, verified effects, speed, multicolor, import/export, and a carefully defined restoration operation.
 - Macros and key remapping are outside the first lighting milestone.
 - Preserve the distinction between local profile saving, UI preview, applying to hardware, and device persistence.

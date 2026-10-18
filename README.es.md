@@ -21,6 +21,7 @@ Propuesta de diseño, no captura de una aplicación funcional ni fotografía del
 - Dirección visual basada en las capturas facilitadas.
 - Investigación estática del protocolo, separada de sus validaciones pendientes.
 - Guía de contribución para trabajar sin hardware.
+- [Plan de implementación](docs/superpowers/plans/2026-10-18-offline-app-and-hardware-probe.md) preparado para revisión, incluyendo selector visual de color, barra de tono y campos HEX/RGB sincronizados.
 
 ## Qué no está implementado
 

@@ -9,6 +9,7 @@ These are future verification requirements, not passing test results. No build o
 - Changing UI language changes controls and recovery text, not physical legends.
 - A color draft updates the preview without altering a saved profile or device state.
 - HEX/RGB values are validated; invalid input preserves the last valid color and shows a labeled error.
+- Clicking or dragging the color area, moving the hue slider, choosing a swatch and editing HEX/RGB all update the same draft color and keyboard preview. The picker supports keyboard operation and keeps hue stable through gray/black; no alpha channel or USB writes.
 - Profile selection, local saving and hardware application are visibly separate.
 - Importing malformed, oversized or unsupported-version JSON cannot overwrite a profile or execute content.
 - Simulated permission denial, disconnect and uncertain apply result never display a misleading hardware-success state.
@@ -28,6 +29,7 @@ These are future verification requirements, not passing test results. No build o
 
 - Read the actual identity and descriptor; record model and firmware evidence available.
 - Demonstrate bounded profile reading before any proposed read-modify-write.
+- Treat the OEM profile-read handshake as an active experiment: it includes a SetFeature request and is NOT a passive/read-only identity check. Do not silently repair the observed report-5 length mismatch.
 - Apply one known uniform color; ask the owner to verify the visible result.
 - Separately verify red, green and blue channels, supported brightness levels and off behavior.
 - Confirm typing and unrelated settings are unchanged.

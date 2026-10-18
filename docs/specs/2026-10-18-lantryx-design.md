@@ -1,6 +1,6 @@
 # LAntryx — design specification
 
-**Status:** draft for owner review. **Date:** 2026-10-18.
+**Status:** direction accepted in conversation; implementation plan awaiting review. **Date:** 2026-10-18.
 
 The owner requested progress while away from the keyboard. This document freezes no hardware assumptions and authorizes no unattended USB experiment. It is the proposed design, not an implementation or release claim.
 
@@ -21,7 +21,8 @@ These are proposals for review. Dependency versions and the HID library/backend 
 ## 3. First functional milestone
 
 - Explicit device detection and compatibility status.
-- A uniform color editor: HEX, RGB, swatches and brightness using verified device levels.
+- A uniform color editor: visual color picker, HEX, RGB, swatches and brightness using verified device levels.
+- The picker has a saturation/value area selectable by click or drag, a hue slider and synchronized HEX/RGB inputs. Keyboard operation must be available; alpha is not supported. Changing it only updates the draft and keyboard preview, never sends USB traffic.
 - Illumination off as an independently verified capability, not assumed equivalent to sending black.
 - Local profile create, rename, duplicate, delete, save, import and export.
 - English and Spanish, independently selectable from the hardware key legends.
@@ -70,14 +71,14 @@ Exclude `SetKeyMatrix`, macro, bootloader and firmware operations from the light
 
 ## 9. Design and delivery
 
-The [desktop brief](../design/desktop-brief.md) defines the proposed UI. A static design sketch is explicitly not an application, not a working hardware demo and not an approved design yet.
+The [desktop brief](../design/desktop-brief.md) defines the accepted visual direction. The existing static sketch is not an application or a working hardware demo. The owner subsequently requested implementation and added the visual color picker; its detailed implementation is covered by the execution plan.
 
 Original project code is proposed under MIT, pending confirmation. Vendor marks and photographs keep their own terms. The public repository is requested but its creation/publication stays after review of the written specification; do not upload raw reverse-engineering evidence or private attachments automatically.
 
 ## 10. Milestones and review gates
 
-1. **Current:** review this written design, architecture, static sketch and offline/hardware boundary.
-2. **Planning:** after written-design approval, write the detailed implementation plan with exact files, interfaces and focused verification.
+1. **Direction accepted:** written design, architecture, static sketch and offline/hardware boundary, with the visual color-picker addition.
+2. **Current:** review the detailed implementation plan with exact files, interfaces and focused verification before execution.
 3. **Offline implementation:** desktop shell, localization, local profiles, keyboard geometry, editor state and simulated transport. No automatic USB operations.
 4. **Owner present:** validate read-only behavior, then a single bounded uniform-color test, brightness and off; stop on unexpected errors.
 5. **Public readiness:** audit assets, license, documentation and claims; create the requested GitHub repository with `gh` and publish only reviewed material.
@@ -85,4 +86,4 @@ Original project code is proposed under MIT, pending confirmation. Vendor marks 
 
 ## 11. Acceptance and open decisions
 
-See [acceptance criteria](../verification/acceptance.md). Open decisions: final technology approval, code license, photo rights, the chosen visual draft, packaging targets and all physically unvalidated protocol semantics. None blocks preparing this design; they do block claiming a finished application.
+See [acceptance criteria](../verification/acceptance.md). Open decisions: implementation-plan approval, code license, photo rights, packaging targets and all physically unvalidated protocol semantics. None blocks preparing the execution plan; they do block claiming a finished application.
