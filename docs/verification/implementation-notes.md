@@ -15,6 +15,8 @@ The owner approved the written plan and native execution. An independent whole-b
 - Treat the session helper's checks as separate from live CLI cancellation. The direct child has an independent timeout and fd identity checks. Cost: real physical behavior is still an owner-present validation task.
 - Leave protocol initialization, effects, per-key hardware color, brightness/off, persistence and packaging unverified. Cost: these functions are not unlocked or advertised as working on hardware.
 
+- Initial publication sends the verified feature HEAD to the new repository’s remote `main`, as requested; no existing shared branch was merged and no PR was created. Cost: the local checkout remains named `feat/offline-editor`, tracking remote main.
+
 ## Deferred minor review findings
 
 1. Color input validation uses a shared invalid flag; RGB fields need the same error association as HEX and per-field error state.

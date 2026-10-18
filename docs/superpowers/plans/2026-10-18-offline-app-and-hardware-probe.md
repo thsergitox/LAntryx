@@ -58,11 +58,11 @@ Define these project-owned contracts in `src/desktop/bridge/contracts.d.ts`; the
 
 **Interfaces:** Produces a loopback-only development launcher and `window.lantryx` with named `profiles`, `preferences` and `device` actions. Backend invokes no adapter during initial render. Later tasks supply handlers; unavailable actions return explicit unavailable errors, not fake success.
 
-- [ ] Inspect and pin dependencies under the policy above; implement the shell in the accepted visual direction, not a marketing landing page. Record the design contract before UI edits.
-- [ ] Implement `scripts/dev.mjs` to start Vite on loopback and launch Electron only when the exact development origin is available; clean up children on exit. No implicit build, no root/sandbox bypass flags.
-- [ ] Set `nodeIntegration:false`, `contextIsolation:true`, `sandbox:true`; restrict navigation/popups/permissions and IPC sender to the owned local origin. No arbitrary IPC or shell API in preload.
-- [ ] Define `npm run dev:offline` and `npm run typecheck` (`tsc --noEmit`); launch offline to verify one responsive window, reload/close cleanup and denied remote navigation. Log actual results, not planned passes.
-- [ ] Commit `feat: add isolated offline desktop shell`.
+- [x] Inspect and pin dependencies under the policy above; implement the shell in the accepted visual direction, not a marketing landing page. Record the design contract before UI edits.
+- [x] Implement `scripts/dev.mjs` to start Vite on loopback and launch Electron only when the exact development origin is available; clean up children on exit. No implicit build, no root/sandbox bypass flags.
+- [x] Set `nodeIntegration:false`, `contextIsolation:true`, `sandbox:true`; restrict navigation/popups/permissions and IPC sender to the owned local origin. No arbitrary IPC or shell API in preload.
+- [x] Define `npm run dev:offline` and `npm run typecheck` (`tsc --noEmit`); launch offline to verify one responsive window, reload/close cleanup and denied remote navigation. Log actual results, not planned passes.
+- [x] Commit `feat: add isolated offline desktop shell`.
 
 ## Task 2 — Validated local profiles and preferences
 
@@ -70,11 +70,11 @@ Define these project-owned contracts in `src/desktop/bridge/contracts.d.ts`; the
 
 **Interfaces:** Implements `ProfileStore`; `validateProfile(input: unknown): Profile`; `createProfileStore(directory: string): ProfileStore`; `importProfile(bytes: Buffer): Promise<Profile>`; `exportProfile(id: string): Promise<void>`. Native main-process file dialogs choose paths; renderer cannot supply a path. Preferences contain only UI language (`en|es`).
 
-- [ ] Implement version 1 validation, max 64 KiB import, 1–64 trimmed name characters, generated UUID IDs, range checks and rejection of unknown fields/schema, paths, packets and executable content. Imported IDs are regenerated; preserve existing profiles.
-- [ ] Store under Electron's user-data directory. Save via same-directory temporary file and rename; clean failed temporaries. Rename/duplicate/delete operate on validated IDs, not user names as paths. Confirm destructive delete; protect unsaved drafts on profile switch.
-- [ ] Implement create/load/rename/duplicate/delete/import/export with clear localized errors. Default Spanish; persist explicit language choice without changing key legends.
-- [ ] Run `node scripts/check-profiles.cjs` using a temporary directory: save/load roundtrip, duplicate isolation, invalid names/ranges, >64 KiB, unsupported schema, forged ID/path and failed-write preservation. Use focused assertions, no new test framework.
-- [ ] Commit `feat: add portable local profiles and language preferences`.
+- [x] Implement version 1 validation, max 64 KiB import, 1–64 trimmed name characters, generated UUID IDs, range checks and rejection of unknown fields/schema, paths, packets and executable content. Imported IDs are regenerated; preserve existing profiles.
+- [x] Store under Electron's user-data directory. Save via same-directory temporary file and rename; clean failed temporaries. Rename/duplicate/delete operate on validated IDs, not user names as paths. Confirm destructive delete; protect unsaved drafts on profile switch.
+- [x] Implement create/load/rename/duplicate/delete/import/export with clear localized errors. Default Spanish; persist explicit language choice without changing key legends.
+- [x] Run `node scripts/check-profiles.cjs` using a temporary directory: save/load roundtrip, duplicate isolation, invalid names/ranges, >64 KiB, unsupported schema, forged ID/path and failed-write preservation. Use focused assertions, no new test framework.
+- [x] Commit `feat: add portable local profiles and language preferences`.
 
 ## Task 3 — Functional editor, visual color picker and keyboard
 
@@ -82,12 +82,12 @@ Define these project-owned contracts in `src/desktop/bridge/contracts.d.ts`; the
 
 **Interfaces:** `parseHex(text: string): Rgb|null`, `formatHex(rgb: Rgb): string`, `createEditorState(profile: Profile): EditorState`, `reduceEditor(state: EditorState, action: EditorAction): EditorState`; define `EditorState`/`EditorAction` together in `contracts.d.ts`. `ColorPicker({color: Rgb,onChange:(color:Rgb)=>void})` consumes only editor callbacks, never the bridge.
 
-- [ ] Read installed React Aria declarations and compose a saturation/value area, hue slider, draggable marker, HEX/RGB fields and clickable swatches. Retain hue while gray/black; disable alpha. Invalid partial inputs retain the last valid color until corrected.
-- [ ] Convert the original static key geometry into 69 labeled vector keys; correct ISO Enter shape. Tint lighting markers with the selected RGB. No false per-key controls. Whole-board preview updates immediately from every color input.
-- [ ] Implement separate saved/draft/last-applied states. Save is local only; offline apply is disabled, with a separate clearly named simulated-result check. Brightness/off display unverified capability reasons, not fake hardware behavior. Deferred effects remain explained, not executable.
-- [ ] Implement sidebar profile actions and full EN/ES, visible keyboard focus, reduced motion and independently scrolling workspace with persistent action row. Check 1440×900, 1180×780 and 960×680.
-- [ ] Run `node scripts/check-editor.mjs` for color boundaries/invalid text, draft/save isolation and applied-state preservation. In Chromium check picker pointer/keyboard input, hue retention, synchronized fields, language switch and zero bridge calls while dragging. Run Impeccable detector and inspect rendered captures in a single review batch.
-- [ ] Commit `feat: add visual RGB picker and keyboard editor`.
+- [x] Read installed React Aria declarations and compose a saturation/value area, hue slider, draggable marker, HEX/RGB fields and clickable swatches. Retain hue while gray/black; disable alpha. Invalid partial inputs retain the last valid color until corrected.
+- [x] Convert the original static key geometry into 69 labeled vector keys; correct ISO Enter shape. Tint lighting markers with the selected RGB. No false per-key controls. Whole-board preview updates immediately from every color input.
+- [x] Implement separate saved/draft/last-applied states. Save is local only; offline apply is disabled, with a separate clearly named simulated-result check. Brightness/off display unverified capability reasons, not fake hardware behavior. Deferred effects remain explained, not executable.
+- [x] Implement sidebar profile actions and full EN/ES, visible keyboard focus, reduced motion and independently scrolling workspace with persistent action row. Check 1440×900, 1180×780 and 960×680.
+- [x] Run `node scripts/check-editor.mjs` for color boundaries/invalid text, draft/save isolation and applied-state preservation. In Chromium check picker pointer/keyboard input, hue retention, synchronized fields, language switch and zero bridge calls while dragging. Run Impeccable detector and inspect rendered captures in a single review batch.
+- [x] Commit `feat: add visual RGB picker and keyboard editor`.
 
 ## Task 4 — Device/application boundary and bounded operations
 
@@ -95,10 +95,10 @@ Define these project-owned contracts in `src/desktop/bridge/contracts.d.ts`; the
 
 **Interfaces:** `createOfflineTransport(): LightingTransport`; `createSession(transport: LightingTransport)` exposes `inspect`, `apply`, `disconnect`, `close`; `applyLighting(lighting: Lighting, generation: number): Promise<ApplyResult>`. Child-process messages are named structured requests, never renderer-origin raw packets.
 
-- [ ] Implement explicit offline composition; lazy-load real HID modules only inside a hardware-mode child. Never switch adapters because a keyboard reconnects or a profile imports. Offline startup must perform zero device enumeration/open operations.
-- [ ] Validate sender/action/payload in main. Refuse unsupported capability application. Serialize at most one operation; invalidate generation on disconnect. Bound child operation to 3 seconds; terminate a stuck child and return unknown outcome, never assume termination undid a transfer. No automatic retry.
-- [ ] Run `node scripts/check-device-boundary.cjs` with injected adapters: bad payload, arbitrary path/raw bytes, duplicate apply, denied access, disconnect during transfer, delayed stale completion and hung worker. No real HID used.
-- [ ] Commit `feat: isolate device operations behind explicit capabilities`.
+- [x] Implement explicit offline composition; lazy-load real HID modules only inside a hardware-mode child. Never switch adapters because a keyboard reconnects or a profile imports. Offline startup must perform zero device enumeration/open operations.
+- [x] Validate sender/action/payload in main. Refuse unsupported capability application. Serialize at most one operation; invalidate generation on disconnect. Bound child operation to 3 seconds; terminate a stuck child and return unknown outcome, never assume termination undid a transfer. No automatic retry.
+- [x] Run `node scripts/check-device-boundary.cjs` with injected adapters: bad payload, arbitrary path/raw bytes, duplicate apply, denied access, disconnect during transfer, delayed stale completion and hung worker. No real HID used.
+- [x] Commit `feat: isolate device operations behind explicit capabilities`.
 
 ## Task 5 — Read-only diagnostics and manually gated RGB probe
 
@@ -106,13 +106,13 @@ Define these project-owned contracts in `src/desktop/bridge/contracts.d.ts`; the
 
 **Interfaces:** `inspectLinuxCandidates(): Promise<Candidate[]>`, `validateCandidate(candidate: Candidate): Validation`; define these internal types in `contracts.d.ts`. `encodeLiveRgb(rgb: Rgb): Buffer` produces only the documented 382-byte report. The renderer never receives or supplies HID paths.
 
-- [ ] Implement sysfs identity/interface/descriptor inspection for `258a:0049`, interface 1 and the observed descriptor hash/report sizes. No hardcoded hidraw number, no first-VID/PID match, no opening normal keyboard input for RGB. Conflicting candidates remain unverified.
-- [ ] Encode exactly `08 0A 7A 01` followed by 126 RGB triples, based on static evidence only. Do NOT implement effect/profile/keymatrix writes or silently shorten report 5. The OEM profile-read handshake itself sends SetFeature and is an active experiment, not passive diagnostics.
-- [ ] Implement hardware-check default `--dry-run`: fixture-only output, no enumeration/open/write. Separate explicit `--inspect` performs read-only sysfs inspection. Native addon availability must be checked without opening a device; missing prebuilt yields actionable limitation, not a rebuild.
-- [ ] Implement a separate owner-present live-RGB experiment requiring interactive confirmation of model and exact RGB, an inspected candidate and explicit acceptance that initialization/persistence is unknown. At most one report-8 transfer per invocation; no periodic stream, permission mutation or persistent writes. On timeout/error stop; do not fall back to another command. Hardware apply in the ordinary UI stays disabled until physical validation.
-- [ ] Run `node scripts/check-protocol.cjs` against fake sysfs/transport: missing/multiple devices, descriptor mismatch, report lengths 6/1032/382, RGB boundary bytes, invalid channels and exactly one allowed send. Run the default dry-run with a spy asserting zero native I/O. Never run real inspection/probe during this offline phase.
-- [ ] Document owner-return steps: inspect, permission assessment without automatic changes, choose one bounded experiment, observe color/channel/typing effects and stop on anomalies. Separate follow-up work for brightness/off/persistence and the report-5 mismatch; do not promise those will pass on the first session.
-- [ ] Commit `feat: prepare gated keyboard diagnostics and RGB probe`.
+- [x] Implement sysfs identity/interface/descriptor inspection for `258a:0049`, interface 1 and the observed descriptor hash/report sizes. No hardcoded hidraw number, no first-VID/PID match, no opening normal keyboard input for RGB. Conflicting candidates remain unverified.
+- [x] Encode exactly `08 0A 7A 01` followed by 126 RGB triples, based on static evidence only. Do NOT implement effect/profile/keymatrix writes or silently shorten report 5. The OEM profile-read handshake itself sends SetFeature and is an active experiment, not passive diagnostics.
+- [x] Implement hardware-check default `--dry-run`: fixture-only output, no enumeration/open/write. Separate explicit `--inspect` performs read-only sysfs inspection. Native addon availability must be checked without opening a device; missing prebuilt yields actionable limitation, not a rebuild.
+- [x] Implement a separate owner-present live-RGB experiment requiring interactive confirmation of model and exact RGB, an inspected candidate and explicit acceptance that initialization/persistence is unknown. At most one report-8 transfer per invocation; no periodic stream, permission mutation or persistent writes. On timeout/error stop; do not fall back to another command. Hardware apply in the ordinary UI stays disabled until physical validation.
+- [x] Run `node scripts/check-protocol.cjs` against fake sysfs/transport: missing/multiple devices, descriptor mismatch, report lengths 6/1032/382, RGB boundary bytes, invalid channels and exactly one allowed send. Run the default dry-run with a spy asserting zero native I/O. Never run real inspection/probe during this offline phase.
+- [x] Document owner-return steps: inspect, permission assessment without automatic changes, choose one bounded experiment, observe color/channel/typing effects and stop on anomalies. Separate follow-up work for brightness/off/persistence and the report-5 mismatch; do not promise those will pass on the first session.
+- [x] Commit `feat: prepare gated keyboard diagnostics and RGB probe`.
 
 ## Task 6 — Integrated verification and honest handoff
 
@@ -120,11 +120,11 @@ Define these project-owned contracts in `src/desktop/bridge/contracts.d.ts`; the
 
 **Interfaces:** Consumes all previous tasks; produces an offline-start guide and an explicit owner-present testing checklist. Keep the static design images distinguishable from actual running-app screenshots.
 
-- [ ] Run typecheck and the focused check scripts; exercise create/edit/save/restart/import/export/language in the actual offline Electron app. Record commands, outcomes and remaining failures. No build/package/rebuild command.
-- [ ] Inspect network/bridge activity during color drag and offline startup; verify no HID operations. Check scrolling, persistent actions, denied/unknown states and keyboard accessibility. Conduct a fresh independent review if the selected execution workflow requires it, then fix verified findings.
-- [ ] Update README commands only after executing them successfully; state exactly which features work offline and which require hardware. No success badges for untested hardware; no claim that the initial probe is a complete driver.
-- [ ] Review publication material and existing `gh` identity. Add a code license only with owner approval; keep the real-keyboard photograph pending until redistribution rights are clear. Create/push the requested public repository only after that audit; do not upload vendor assets or private evidence. Open the published repository for review.
-- [ ] Commit `docs: document offline use and owner-present hardware checks`.
+- [x] Run typecheck and the focused check scripts; exercise create/edit/save/restart/import/export/language in the actual offline Electron app. Record commands, outcomes and remaining failures. No build/package/rebuild command.
+- [x] Inspect network/bridge activity during color drag and offline startup; verify no HID operations. Check scrolling, persistent actions, denied/unknown states and keyboard accessibility. Conduct a fresh independent review if the selected execution workflow requires it, then fix verified findings.
+- [x] Update README commands only after executing them successfully; state exactly which features work offline and which require hardware. No success badges for untested hardware; no claim that the initial probe is a complete driver.
+- [x] Review publication material and existing `gh` identity. Add a code license only with owner approval; keep the real-keyboard photograph pending until redistribution rights are clear. Create/push the requested public repository only after that audit; do not upload vendor assets or private evidence. Open the published repository for review.
+- [x] Commit `docs: document offline use and owner-present hardware checks`.
 
 ## Completion boundary and handoff
 
@@ -137,3 +137,5 @@ Offline app complete means a runnable, verified editor with profiles and a worki
 The fresh review required actual opened-handle identity binding. The final experimental transport therefore uses Python 3 stdlib `fcntl.ioctl` on one fd (Linux x86_64), instead of node-hid: its available JS API exposed device info but not the needed same-handle report descriptor. The Node addon was removed, no native rebuild was run, and timeout kills the direct child rather than leaving a grandchild. This costs a Python 3 dependency for checks/probe, not for offline editing.
 
 A first integrated commit contains the runnable shell/profile/editor/boundary milestone because their contracts are interdependent. Backend verification uses runtime validation and focused checks; it is not claimed to be fully TypeScript checked. No production builds or physical experiments were performed. The owner-approved MIT proposal covers only original project material. The physical product photograph remains pending clearance and is not a publication asset.
+
+Publication verified: public repository `https://github.com/thsergitox/LAntryx`, default remote branch `main`, initial application publication at `10672a6`. Local execution remains on `feat/offline-editor`; publication created remote main directly and did not merge into an existing shared branch or create a pull request.
